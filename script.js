@@ -53,7 +53,7 @@ const pokemons = [
     { name: 'Mewtwo', type: 'Psy', level: 70, img: 'mewtwo.png' }
 ];
 
-// Le container de Pokémons
+// Récupération de la div.pokemon-container
 const pokemonContainer = document.querySelector('.pokemon-container');
 console.log(pokemonContainer);
 
@@ -69,7 +69,16 @@ function displayPokemons () {
     // Parcourir le tableau de Pokémon et créer
     // un paragraph pour chaque Pokémon avec son nom
     for(let p of pokemons) {
-        pokemonContainer.innerHTML += `<p>${p.name}</p>`;
+        // Récupérer les types du Pokémon parcouru
+        const types = p.type.split(',');
+
+        // Ajout les pokemons dans le container
+        pokemonContainer.innerHTML +=  `
+            <p>
+                ${p.name}
+                <small>${types.join("</small> <small>")}</small>
+            </p>
+        `;
     }
 }
 
