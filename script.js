@@ -68,16 +68,18 @@ function displayPokemons () {
 
     // Parcourir le tableau de Pokémon et créer
     // un paragraph pour chaque Pokémon avec son nom
-    for(let p of pokemons) {
-        // Récupérer les types du Pokémon parcouru
-        const types = p.type.split(',');
+    for(let pokeball of pokemons) {
+        // Récupérer les types du Pokémon parcouru dans un tableau
+        const types = pokeball.type.split(',');
 
         // Ajout les pokemons dans le container
         pokemonContainer.innerHTML +=  `
-            <p>
-                ${p.name}
-                <small>${types.join("</small> <small>")}</small>
-            </p>
+            <div class="pokemon-card" style="background: #705898;">
+                <img src="images/${ pokeball.img }" alt="${ pokeball.name}">
+                <h2>${ pokeball.name }</h2>
+                <div>Type: ${ types.join(' / ') }</div>
+                <div>Niveau: ${ pokeball.level }</div>
+            </div>
         `;
     }
 }
