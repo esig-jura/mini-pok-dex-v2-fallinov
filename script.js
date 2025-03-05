@@ -55,7 +55,13 @@ const pokemons = [
 
 // Récupération de la div.pokemon-container
 const pokemonContainer = document.querySelector('.pokemon-container');
-console.log(pokemonContainer);
+const searchBar = document.getElementById('search-bar');
+
+
+// Fonction qui filtre et trie les Pokémon
+function filterAndSortPokemons() {
+    alert('Filtre !')
+}
 
 // Fonction qui affiche les Pokémon dans le container
 function displayPokemons () {
@@ -97,6 +103,9 @@ function displayPokemons () {
 
 // Appeler la fonction pour afficher les Pokémon
 displayPokemons();
+
+// Ajouter un écouteur d'événement sur la barre de recherche
+searchBar.addEventListener('input', filterAndSortPokemons);
 
 
 
