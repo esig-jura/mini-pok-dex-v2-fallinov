@@ -69,14 +69,24 @@ function displayPokemons () {
     // un paragraph pour chaque Pokémon avec son nom
     for(let pokeball of pokemons) {
         // Récupérer les types du Pokémon parcouru dans un tableau
-        const types = pokeball.type.split(',');
-        console.log('Types du pokemon : ', types);
+        const tabTypes = pokeball.type.split(',');
+        // La couleur de fond est celle du premier type
+        let couleurFond = typeColors[tabTypes[0]]
+
+        // Test si le pokémon plusieurs types
+        if(tabTypes.length > 1) {
+            // Crée un dégradé de couleur pour les pokémons avec plusieurs types
+            couleurFond = `linear-gradient(to right,
+                            ${typeColors[tabTypes[0]]} 50%,
+                            ${typeColors[tabTypes[1]]} 50%);`
+        }
+
         // Ajout les pokemons dans le container
         pokemonContainer.innerHTML +=  `
-            <div class="pokemon-card" style="background: ${typeColors[types[0]]};">
+            <div class="pokemon-card" style="background: ${couleurFond};">
                 <img src="images/${ pokeball.img }" alt="${ pokeball.name}">
                 <h2>${ pokeball.name }</h2>
-                <div>Type: ${ types.join(' / ') }</div>
+                <div>Type: ${ tabTypes.join(' / ') }</div>
                 <div>Niveau: ${ pokeball.level }</div>
             </div>
         `;
