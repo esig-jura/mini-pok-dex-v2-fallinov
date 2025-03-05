@@ -60,20 +60,29 @@ const searchBar = document.getElementById('search-bar');
 
 // Fonction qui filtre et trie les Pokémon
 function filterAndSortPokemons() {
-    alert('Filtre !')
+    // Récupérer la valeur de la barre de recherche en minuscule
+    let searchValue = searchBar.value.toLowerCase();
+    // Retourne tous les pokemon dont le nom contient la valeur de recherche
+    let pokemonsTrouves = pokemons.filter(pokemonParcouru => pokemonParcouru.name.toLowerCase().includes(searchValue));
+    // Réaffiche les pokémons
+    displayPokemons(pokemonsTrouves);
 }
 
 // Fonction qui affiche les Pokémon dans le container
-function displayPokemons () {
+// Par défaut, le tableau de Pokémon à afficher est le tableau complet
+function displayPokemons (pokemonsAAfficher = pokemons) {
+    // Supprime les pokémons déjà affichés
+    pokemonContainer.innerHTML = '';
+
     // Si le tableau est vide on affiche un message d'erreur
-    if(pokemons.length < 1) {
+    if(pokemonsAAfficher.length < 1) {
         pokemonContainer.innerHTML = '<p>Dracaufeu a tout brûlé, aucun Pokémon ne correspond à ta recherche !</p>';
         return; // Stopper l'exécution de la fonction
     }
 
     // Parcourir le tableau de Pokémon et créer
     // un paragraph pour chaque Pokémon avec son nom
-    for(let pokeball of pokemons) {
+    for(let pokeball of pokemonsAAfficher) {
         // Récupérer les types du Pokémon parcouru dans un tableau
         const tabTypes = pokeball.type.split(',');
         // La couleur de fond est celle du premier type
