@@ -71,14 +71,16 @@ function displayPokemons () {
         // Récupérer les types du Pokémon parcouru dans un tableau
         const tabTypes = pokeball.type.split(',');
         // La couleur de fond est celle du premier type
-        let couleurFond = typeColors[tabTypes[0]]
+        let couleurFond = typeColors[tabTypes[0]] || DEFAULT_COLOR;
 
         // Test si le pokémon plusieurs types
+        // S'il a plusieurs types, on change la couleur de fond par un dégradé
         if(tabTypes.length > 1) {
             // Crée un dégradé de couleur pour les pokémons avec plusieurs types
             couleurFond = `linear-gradient(to right,
-                            ${typeColors[tabTypes[0]]} 50%,
-                            ${typeColors[tabTypes[1]]} 50%);`
+                            ${ typeColors[tabTypes[0]] || DEFAULT_COLOR } 50%,
+                            ${ typeColors[tabTypes[1]] || DEFAULT_COLOR } 50%
+                           );`
         }
 
         // Ajout les pokemons dans le container
