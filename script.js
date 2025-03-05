@@ -57,7 +57,6 @@ const pokemons = [
 const pokemonContainer = document.querySelector('.pokemon-container');
 console.log(pokemonContainer);
 
-
 // Fonction qui affiche les Pokémon dans le container
 function displayPokemons () {
     // Si le tableau est vide on affiche un message d'erreur
@@ -71,10 +70,10 @@ function displayPokemons () {
     for(let pokeball of pokemons) {
         // Récupérer les types du Pokémon parcouru dans un tableau
         const types = pokeball.type.split(',');
-
+        console.log('Types du pokemon : ', types);
         // Ajout les pokemons dans le container
         pokemonContainer.innerHTML +=  `
-            <div class="pokemon-card" style="background: #705898;">
+            <div class="pokemon-card" style="background: ${typeColors[types[0]]};">
                 <img src="images/${ pokeball.img }" alt="${ pokeball.name}">
                 <h2>${ pokeball.name }</h2>
                 <div>Type: ${ types.join(' / ') }</div>
