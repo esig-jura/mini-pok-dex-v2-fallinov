@@ -56,14 +56,23 @@ const pokemons = [
 // Récupération de la div.pokemon-container
 const pokemonContainer = document.querySelector('.pokemon-container');
 const searchBar = document.getElementById('search-bar');
-
+const selectedType = document.getElementById('type-filter');
 
 // Fonction qui filtre et trie les Pokémon
 function filterAndSortPokemons() {
+    alert(selectedType.value);
     // Récupérer la valeur de la barre de recherche en minuscule
     let searchValue = searchBar.value.toLowerCase();
+
     // Retourne tous les pokemon dont le nom contient la valeur de recherche
-    let pokemonsTrouves = pokemons.filter(pokemonParcouru => pokemonParcouru.name.toLowerCase().includes(searchValue));
+    let pokemonsTrouves = pokemons.filter(pokemonParcouru => {
+        // Test si le nom du Pokémon parcouru contient la valeur de recherche
+        const matchesName =  pokemonParcouru.name.toLowerCase().includes(searchValue)
+        // Test si le type du Pokémon parcouru correspond au type sélectionné
+        const matchesType = pokemonParcouru.type.includes(selectedType.value);
+        // Retourne true si le nom et le type correspondent
+        return matchesName && matchesType;
+    });
     // Réaffiche les pokémons
     displayPokemons(pokemonsTrouves);
 }
@@ -115,6 +124,8 @@ displayPokemons();
 
 // Ajouter un écouteur d'événement sur la barre de recherche
 searchBar.addEventListener('input', filterAndSortPokemons);
+// Ajouter un écouteur sur la liste déroulante des types
+selectedType.addEventListener('change', filterAndSortPokemons);
 
 
 
