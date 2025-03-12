@@ -57,6 +57,8 @@ const pokemons = [
 const pokemonContainer = document.querySelector('.pokemon-container');
 const searchBar = document.getElementById('search-bar');
 const selectedType = document.getElementById('type-filter');
+const selectedSortOrder = document.getElementById('sort-order');
+
 
 // Fonction qui filtre et trie les Pokémon
 function filterAndSortPokemons() {
@@ -75,7 +77,17 @@ function filterAndSortPokemons() {
 
     // Tri les pokémons touvés
     pokemonsTrouves.sort(function (pokemonA, pokemonB) {
-        return pokemonA.level - pokemonB.level;
+        // Test sur la valeur de la liste déroulante de tri
+        switch (selectedSortOrder.value) {
+            case 'level-asc':
+                return pokemonA.level - pokemonB.level;
+            case 'level-desc':
+                return pokemonB.level - pokemonA.level;
+            case 'name-desc':
+                return pokemonB.name.localeCompare(pokemonA.name, 'fr');
+            default: // Par défaut, nom des pokémons par ordre alphabétique
+                return pokemonA.name.localeCompare(pokemonB.name, 'fr');
+        }
     });
 
     // Réaffiche les pokémons
@@ -131,6 +143,8 @@ filterAndSortPokemons();
 searchBar.addEventListener('input', filterAndSortPokemons);
 // Ajouter un écouteur sur la liste déroulante des types
 selectedType.addEventListener('change', filterAndSortPokemons);
+// Ajouter un écouteur sur la liste déroulante de tri
+selectedSortOrder.addEventListener('change', filterAndSortPokemons);
 
 
 
